@@ -16,6 +16,8 @@ This project directly supports **SDG 3 – Good Health & Well-Being** by improvi
 ## 🧠 How the System Works (Step-by-Step)
 
 ### 🔹 1. User Initiates an Emergency Request
+<img width="1664" height="982" alt="image" src="https://github.com/user-attachments/assets/3e769980-a5bd-4b6d-bcca-3e7008b64177" />
+
 
 A user fills in an emergency form on the React frontend. The user's location is detected using HTML5 Geolocation.
 
