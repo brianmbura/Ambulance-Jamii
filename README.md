@@ -1,140 +1,275 @@
-# 🚑 AmbulanceJamii
+# Ambulance Jamii - Emergency Medical Services Platform
 
-### AI-Powered Emergency Response Optimization System
+A comprehensive MERN stack web application for streamlining emergency ambulance requests, dispatching, hospital availability management, and analytics reporting.
 
-_MERN Stack | SDG 3: Good Health & Well-Being | Final Year Project_
+## 🚑 Features
 
-**Live Demo:** https://ambulancejamii.netlify.app/
+### Core Functionality
+- **Emergency Request Portal**: Public interface for requesting ambulances with geolocation
+- **Dispatch Management**: Real-time dashboard for emergency operators
+- **Driver Interface**: Mobile-optimized interface for ambulance drivers
+- **Hospital Dashboard**: Capacity management and availability tracking
+- **Analytics & Reporting**: Comprehensive performance metrics and insights
 
-## 📌 Overview
+### Technical Features
+- **Real-time Communication**: WebSocket integration for live updates
+- **Role-based Access Control**: Multi-user authentication system
+- **Geolocation Services**: Google Maps integration for location tracking
+- **Payment Processing**: Stripe integration for premium services
+- **Responsive Design**: Mobile-first approach with desktop optimization
+- **RESTful API**: Comprehensive backend API with proper error handling
 
-AmbulanceJamii is an AI-powered emergency dispatch system designed to optimize ambulance response times in Kenya.  
-The system uses **AI severity prediction**, **geolocation**, and **MERN stack technologies** to match patients with the nearest available ambulance and recommend hospitals with available bed capacity.
+## 🛠 Tech Stack
 
-This project directly supports **SDG 3 – Good Health & Well-Being** by improving emergency healthcare coordination.
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - Database with Mongoose ODM
+- **Socket.io** - Real-time communication
+- **JWT** - Authentication
+- **Stripe** - Payment processing
+- **Nodemailer** - Email notifications
 
-## 🧠 How the System Works (Step-by-Step)
+### Frontend
+- **React 18** - UI framework
+- **Redux Toolkit** - State management
+- **React Query** - Data fetching and caching
+- **React Router** - Navigation
+- **Tailwind CSS** - Styling
+- **Vite** - Build tool
+- **Leaflet** - Maps integration
 
-### 🔹 1. User Initiates an Emergency Request
-<img width="1664" height="982" alt="image" src="https://github.com/user-attachments/assets/3e769980-a5bd-4b6d-bcca-3e7008b64177" />
+### Development Tools
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Jest** - Testing framework
+- **Nodemon** - Development server
+- **Concurrently** - Run multiple commands
 
+## 📁 Project Structure
 
-A user fills in an emergency form on the React frontend. The user's location is detected using HTML5 Geolocation.
+```
+ambulance-jamii/
+├── server/                 # Backend application
+│   ├── models/            # Database models
+│   ├── routes/            # API routes
+│   ├── middleware/        # Custom middleware
+│   ├── socket/            # Socket.io handlers
+│   ├── utils/             # Utility functions
+│   └── index.js           # Server entry point
+├── client/                # Frontend application
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
+│   │   ├── store/         # Redux store and slices
+│   │   ├── services/      # API services
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── utils/         # Utility functions
+│   │   └── App.jsx        # Main App component
+│   ├── public/            # Static assets
+│   └── index.html         # HTML template
+└── README.md
+```
 
-### 🔹 2. Request Sent to Backend (Express API)
+## 🚀 Getting Started
 
-A POST request is sent to `/api/requests` containing patient details.
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn package manager
 
-### 🔹 3. Backend Performs AI Severity Classification
+### Installation
 
-The backend uses a Hugging Face NLP model to classify severity as HIGH, MEDIUM, or LOW.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/ambulance-jamii.git
+   cd ambulance-jamii
+   ```
 
-### 🔹 4. Data Saved in MongoDB
+2. **Install dependencies**
+   ```bash
+   # Install root dependencies
+   npm install
+   
+   # Install server dependencies
+   npm run install-server
+   
+   # Install client dependencies
+   npm run install-client
+   ```
 
-The emergency request is stored in a MongoDB `requests` collection.
+3. **Environment Setup**
+   ```bash
+   # Copy environment file
+   cp server/.env.example server/.env
+   ```
 
-### 🔹 5. System Finds Nearest Ambulance
+4. **Configure Environment Variables**
+   Edit `server/.env` with your configuration:
+   ```env
+   # Database
+   MONGODB_URI=mongodb://localhost:27017/ambulance_jamii
+   
+   # JWT
+   JWT_SECRET=your_super_secret_jwt_key_here
+   JWT_EXPIRE=7d
+   
+   # Server
+   PORT=5000
+   NODE_ENV=development
+   
+   # Stripe (Optional)
+   STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+   STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+   
+   # Google Maps (Optional)
+   GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+   
+   # Email (Optional)
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_PORT=587
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASS=your_app_password
+   ```
 
-Using the Haversine formula, the system finds the nearest available ambulance.
+5. **Start the Application**
+   ```bash
+   # Development mode (runs both server and client)
+   npm run dev
+   
+   # Or run separately
+   npm run server  # Backend only
+   npm run client  # Frontend only
+   ```
 
-### 🔹 6. Ambulance Assignment
+6. **Access the Application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
+   - API Health Check: http://localhost:5000/api/health
 
-Dispatcher assigns the nearest ambulance. Database updates status accordingly.
+## 👥 User Roles & Access
 
-### 🔹 7. Hospital Load Balancing
+### Public Users
+- Submit emergency requests
+- Track ambulance status
+- View estimated arrival times
 
-The system identifies hospitals with available bed capacity.
+### Dispatchers
+- View all emergency requests
+- Assign ambulances to emergencies
+- Monitor fleet status
+- Access analytics dashboard
 
-### 🔹 8. Real-Time Dashboards
+### Drivers
+- Receive emergency assignments
+- Update status and location
+- Navigate to emergency locations
+- Communicate with dispatch
 
-Different dashboards show real‑time data for dispatchers, drivers, and hospitals.
+### Hospital Administrators
+- Manage bed availability
+- Update ER status
+- View incoming patients
+- Coordinate with dispatch
 
-### 🔹 9. Completion & Analytics Logging
+### Analytics Administrators
+- Access comprehensive reports
+- View performance metrics
+- Export data for analysis
+- Monitor system health
 
-When a case is completed, analytics are updated for reporting.
+## 🔧 API Endpoints
 
-## 🧱 Tech Stack (MERN + AI)
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+- `PUT /api/auth/profile` - Update profile
+- `POST /api/auth/logout` - User logout
 
-- **Frontend:** React.js, TypeScript, TailwindCSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB, Mongoose
-- **AI:** Hugging Face NLP API
-- **Other:** Google Geolocation API, GitHub, Gamma
+### Emergency Management
+- `POST /api/emergency` - Create emergency request
+- `GET /api/emergency` - Get all emergencies
+- `GET /api/emergency/:id` - Get emergency by ID
+- `PUT /api/emergency/:id/assign` - Assign ambulance
+- `PUT /api/emergency/:id/status` - Update status
 
-## 🧪 Installation & Setup
+### Ambulance Management
+- `GET /api/ambulance` - Get all ambulances
+- `GET /api/ambulance/:id` - Get ambulance by ID
+- `PUT /api/ambulance/:id/location` - Update location
+- `PUT /api/ambulance/:id/status` - Update status
 
-### 1️⃣ Clone the Repository
+### Hospital Management
+- `GET /api/hospital` - Get all hospitals
+- `GET /api/hospital/:id` - Get hospital by ID
+- `PUT /api/hospital/:id/capacity` - Update capacity
+- `PUT /api/hospital/:id/status` - Update ER status
+
+### Analytics
+- `GET /api/analytics/overview` - System overview
+- `GET /api/analytics/response-times` - Response time metrics
+- `GET /api/analytics/hospital-load` - Hospital capacity data
+
+## 🧪 Testing
 
 ```bash
-git clone https://github.com/your-username/AmbulanceJamii.git
-cd AmbulanceJamii
+# Run server tests
+cd server && npm test
+
+# Run client tests
+cd client && npm test
+
+# Run all tests
+npm run test
 ```
 
-### 2️⃣ Install Dependencies
+## 📦 Deployment
 
-#### Backend:
-
+### Production Build
 ```bash
-cd backend
-npm install
-```
+# Build client for production
+npm run build
 
-#### Frontend:
-
-```bash
-cd frontend
-npm install
-```
-
-### 3️⃣ Configure Environment Variables
-
-Create a `.env` file inside **backend**:
-
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-HUGGINGFACE_API_KEY=your_hf_api_key
-HF_MODEL=distilbert-base-uncased-finetuned-sst-2-english
-```
-
-### 4️⃣ Run the Backend
-
-```bash
-npm run dev
-```
-
-### 5️⃣ Run the Frontend
-
-```bash
+# Start production server
 npm start
 ```
 
-## 📊 Monetization Strategy
+### Environment Variables for Production
+```env
+NODE_ENV=production
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ambulance_jamii
+CLIENT_URL=https://your-domain.com
+```
 
-- SaaS subscription
-- Pay‑per‑ambulance licensing
-- Government integrations
-- Premium analytics
+### Docker Deployment (Optional)
+```bash
+# Build and run with Docker
+docker-compose up --build
+```
 
-## 🌍 SDG Impact – SDG 3
+## 🤝 Contributing
 
-Improves emergency outcomes and reduces preventable deaths.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📆 Current Progress
+## 📄 License
 
-✔ Architecture completed  
-✔ UI mockups created  
-✔ AI logic integrated  
-⏳ Backend integration ongoing
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🛤 Future Improvements
+## 🆘 Support
 
-- ML route optimization
-- Live GPS tracking
-- IoT vitals
-- National scaling
+For support, email support@ambulancejamii.com or create an issue in the GitHub repository.
 
-## 👤 Author
+## 🙏 Acknowledgments
 
-**Brian Mbura**  
-GitHub: https://github.com/brianmbura
+- Emergency medical services professionals for their insights
+- Open source community for the amazing tools and libraries
+- Healthcare technology innovators for inspiration
+
+---
+
+**Ambulance Jamii** - Saving lives through technology 🚑❤️
